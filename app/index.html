@@ -3,13 +3,39 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cool Project</title>
+    <title>Contact Form</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    <div class="container">
-      <p>Welcome to your life.</p>
+  <body ng-app="app">
+    <div class="container" ng-controller="MainController">
+      <div class="form-container">
+        <h1>Contact Us</h1>
+        <form name="contactForm" class="contact-form" ng-submit="addInfo(info)">
+          Name <br />
+          <input class="name input" ng-model="info.name"/> <br />
+          Email <br />
+          <input class="email input" ng-model="info.email"/> <br />
+          Website <br />
+          <input type="url" name="website" class="website input" ng-model="info.website" required /> <br />
+          <span class="error" ng-show="contactForm.website.$error.required && contactForm.website.$dirty">Website Required!</span>
+          <span class="error" ng-show="contactForm.website.$error.url">http:// Required!</span><br />
+          Message <br />
+          <textarea class="message input" ng-model="info.message"></textarea> <br />
+          <button class="submit-button">Submit</button>
+        </form>
+      </div>
+      <div class="list-container">
+        <ul class="list">
+          <li ng-repeat="info in infos" data-id="{{ info._id }}">
+              <span>Name:</span> {{ info.name }} <br />
+              <span>Email:</span> {{ info.email }}<br />
+              <span>Website:</span> {{ info.website }}<br />
+              <span>Comment:</span> {{ info.message }}<br />
+            <button class="delete-button" ng-click="deleteMe(info._id)">Delete</button>
+          </li>
+        </ul>
+      </div>
     </div>
     <script src="js/bundle.js"></script>
   </body>
