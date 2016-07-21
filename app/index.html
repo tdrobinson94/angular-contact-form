@@ -13,15 +13,19 @@
         <h1>Contact Us</h1>
         <form name="contactForm" class="contact-form" ng-submit="addInfo(info)">
           Name <br />
-          <input class="name input" ng-model="info.name"/> <br />
+          <input name="name" type="text" class="name input" ng-model="info.name" required/> <br />
+          <span class="error" ng-show="contactForm.name.$error.required">** Input Required! **</span><br />
           Email <br />
-          <input class="email input" ng-model="info.email"/> <br />
+          <input name="email" type="email" class="email input" ng-model="info.email" required/> <br />
+          <span class="error" ng-show="contactForm.email.$error.required">** Email Required! **</span>
+          <span class="error" ng-show="contactForm.email.$error.email">** @ Required! **</span><br />
           Website <br />
           <input type="url" name="website" class="website input" ng-model="info.website" required /> <br />
-          <span class="error" ng-show="contactForm.website.$error.required && contactForm.website.$dirty">Website Required!</span>
-          <span class="error" ng-show="contactForm.website.$error.url">http:// Required!</span><br />
+          <span class="error" ng-show="contactForm.website.$error.required">** Website Required! **</span>
+          <span class="error" ng-show="contactForm.website.$error.url">** http:// Required! **</span><br />
           Message <br />
-          <textarea class="message input" ng-model="info.message"></textarea> <br />
+          <textarea name="message" type="text" class="message input" ng-model="info.message" required></textarea> <br />
+          <span class="error" ng-show="contactForm.message.$error.required">** Input Required! **</span><br />
           <button class="submit-button">Submit</button>
         </form>
       </div>
